@@ -28,16 +28,25 @@ msgblk = codeword(1:4);
 % % There are four possible one bit errors in the message block
 % 
 % % Modify the code below
-if (S(1)==1)
-   msgblk(1)=not(msgblk(1));%when one bit error is in msgblk(1)
-elseif (S(2)==1)
-   msgblk(2)=not(msgblk(2));%when one bit error is in msgblk(2)
-elseif (S(3)==1)
-   msgblk(3)=not(msgblk(3));%when one bit error is in msgblk(3)
-elseif (S(4)==1)
-   msgblk(4)=not(msgblk(4));%when one bit error is in msgblk(4)
+%{
+    if (S(1)==1)
+        msgblk(1)=not(msgblk(1));%when one bit error is in msgblk(1)
+    elseif (S(2)==1)
+    msgblk(2)=not(msgblk(2));%when one bit error is in msgblk(2)
+    elseif (S(3)==1)
+    msgblk(3)=not(msgblk(3));%when one bit error is in msgblk(3)
+    elseif (S(4)==1)
+    msgblk(4)=not(msgblk(4));%when one bit error is in msgblk(4)
+    end
+    %}
+err_pos = 0;
+for i = 1:length(S)
+    err_pos = err_pos + S(i) * 2^(length(S) - i);
 end
 
+if err_pos >= 1 && err_pos <= 4
+    msgblk(err_pos) = not(msgblk(err_pos));
+end
 
 
 
